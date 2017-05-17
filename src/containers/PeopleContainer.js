@@ -9,14 +9,19 @@ class PeopleContainer extends Component {
   }
 
   render() {
+    console.log(this.props);
     const {resource, isFetching, getPage} = this.props;
-    return (
-      <div>
-        <People people={resource.results} isFetching={isFetching} />
-        <button onClick={() => getPage(resource.previous)}>Previous</button>
-        <button onClick={() => getPage(resource.next)}>next</button>
-      </div>
-    );
+    if (!isFetching) {
+      return (
+        <div>
+          <People people={resource.results} isFetching={isFetching} />
+          <button onClick={() => getPage(resource.previous)}>Previous</button>
+          <button onClick={() => getPage(resource.next)}>next</button>
+        </div>
+      );
+    } else {
+      return <h2>...loading</h2>;
+    }
   }
 }
 
