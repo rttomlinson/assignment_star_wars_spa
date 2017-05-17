@@ -7,7 +7,9 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" render={() => <h1>Home</h1>} />
+          <Route exact path="/" render={() => {
+            return <h1>Home</h1>}
+            }/>
           <Route path="/planets" component={PlanetsContainer} />
           <Route
             render={() => {
@@ -15,7 +17,6 @@ class App extends Component {
             }}
           />
         </Switch>
-
       </Router>
     );
   }

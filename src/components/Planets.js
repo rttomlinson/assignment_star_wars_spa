@@ -1,9 +1,10 @@
 import React from "react";
 import {withRouter} from "react-router-dom";
 
-const Planets = () => {
+const Planets = ({planets}) => {
   return (
     <div>
+        <pre>{planets}</pre>
       <h1>Planets Here</h1>
     </div>
   );

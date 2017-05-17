@@ -1,12 +1,45 @@
-import React, {Component} from "react";
-import {connect} from "react-redux";
+import React, {
+    Component
+}
+from "react";
+import {
+    connect
+}
+from "react-redux";
 import Planets from "../components/Planets";
+import {
+    getResource
+}
+from '../actions/actions';
+
 
 class PlanetsContainer extends Component {
-  render() {
-    return <Planets />;
-  }
+    componentDidMount() {
+        this.props.getResource('planets');
+    }
+
+    render() {
+        const {resource, isFetching} = this.props;
+        return <Planets planets={resource} isFetching={isFetching}/>;
+    }
+
+
+
 }
 
-// export default connect()(PlanetsContainer);
-export default PlanetsContainer;
+function mapStateToProps(state) {
+    return {
+        resource: state.resource,
+        isFetching: state.isFetching
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getResource: (type) => {
+            dispatch(getResource(type));
+        }
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlanetsContainer);

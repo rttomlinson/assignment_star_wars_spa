@@ -3,32 +3,38 @@ import ReactDOM from "react-dom";
 import App from "./components/App";
 import "./index.css";
 import {Provider} from "react-redux";
+import { createStore, applyMiddleware } from 'redux';
+import {
+    MAKE_REQUEST,
+    REQUEST_SUCCESS,
+    REQUEST_FAILURE
+} from './actions/types';
+import thunk from 'redux-thunk';
 
-
-state:{
-  fetch:{isFetching:false, error:null},
-  planets:[],
-  people:[]
+const INITIAL_STATE = {
+    isFetching: false,
+    error: null,
+    resource: []
 }
 
-function planets(
-  state = {planets: [], isFetching: false, error: null},
+function swampiApp(
+  state = INITIAL_STATE,
   action
 ) {
   switch (action.type) {
-    case REQUEST_PLANETS:
+    case MAKE_REQUEST:
       return {
         ...state,
         isFetching: true,
         error: null
       };
-    case SUCCESS_PLANETS:
+    case REQUEST_SUCCESS:
       return {
         ...state,
-        planets: action.data,
+        resource: action.data,
         isFetching: false
       };
-    case FAILURE_PLANETS:
+    case REQUEST_FAILURE:
       return {
         ...state,
         isFetching: false,
@@ -39,28 +45,14 @@ function planets(
   }
 }
 
+
+const store = createStore(swampiApp, applyMiddleware(thunk));
+
+
 ReactDOM.render(
-  <Provider>
+  <Provider store={store}>
     <App />
   </Provider>,
   document.getElementById("root")
 );
 
-navlinks: people, planets
-
-state: {
-  currentResource:[],
-  isFetching:[]
-}
-
-actions:
-requesting
-success
-failure
-
-getResources(type)
-fetch(`api/${type}`)
-
-
-link -> planetsContainer (mount) onMount (get data) update
-link -> peopleContainer
