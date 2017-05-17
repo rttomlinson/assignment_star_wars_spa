@@ -1,9 +1,8 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import People from "../components/People";
-import {getResource, getPage, searchResources} from "../actions/actions";
-import Button from '../components/elements/Button';
-import Pagination from '../components/Pagination';
+import {getResource, searchResources} from "../actions/actions";
+import Pagination from "../components/Pagination";
 class PeopleContainer extends Component {
   componentDidMount() {
     this.props.getResource("https://swapi.co/api/people");
@@ -13,17 +12,14 @@ class PeopleContainer extends Component {
     const {resource, isFetching, getResource, searchResources} = this.props;
     let previousUrlFetch = () => getResource(resource.previous);
     let nextUrlFetch = () => getResource(resource.next);
-    
-    
+
     if (!isFetching) {
       return (
         <div>
-            <Pagination previousUrl={previousUrlFetch} nextUrl={nextUrlFetch} />
-
+          <Pagination previousUrl={previousUrlFetch} nextUrl={nextUrlFetch} />
           <input type="text" onKeyPress={searchResources} />
           <People people={resource.results} isFetching={isFetching} />
-            <Pagination previousUrl={previousUrlFetch} nextUrl={nextUrlFetch} />
-
+          <Pagination previousUrl={previousUrlFetch} nextUrl={nextUrlFetch} />
         </div>
       );
     } else {

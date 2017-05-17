@@ -1,9 +1,9 @@
 import React from "react";
-import {withRouter, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const Planets = ({planets}) => {
   const planetsList = planets.map(planet => {
-      let id = 1;
+    let id = 1;
     return (
       <div key={planet.url}>
         <Link to={`/planets/${id}`}>Planet Details</Link>

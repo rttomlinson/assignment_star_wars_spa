@@ -1,5 +1,4 @@
 import React from "react";
-import {withRouter} from "react-router-dom";
 
 const People = ({people}) => {
   const peopleList = people.map(person => {
