@@ -20,7 +20,7 @@ class App extends Component {
             />
             <Route path="/people" component={PeopleContainer} />
             <Route exact path="/planets" component={PlanetsContainer} />
-            <Route exact path="/planets/:id" component={PlanetContainer} />
+            <Route path="/planets/:id" component={PlanetContainer} />
             <Route
               render={() => {
                 return <h1>Page not found</h1>;
