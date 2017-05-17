@@ -6,7 +6,7 @@ import {getResource, getPage} from "../actions/actions";
 class PlanetsContainer extends Component {
   componentDidMount() {
     console.log("mount");
-    this.props.getResource("planets");
+    this.props.getResource("https://swapi.co/api/planets");
   }
 
   componentWillUnmount() {
@@ -14,13 +14,19 @@ class PlanetsContainer extends Component {
   }
   render() {
     console.log(this.props);
-    const {resource, isFetching, getPage} = this.props;
+    const {resource, isFetching, getResource} = this.props;
     if (!isFetching) {
       return (
         <div>
+          <button onClick={() => getResource(resource.previous)}>
+            Previous
+          </button>
+          <button onClick={() => getResource(resource.next)}>next</button>
           <Planets planets={resource.results} isFetching={isFetching} />
-          <button onClick={() => getPage(resource.previous)}>Previous</button>
-          <button onClick={() => getPage(resource.next)}>next</button>
+          <button onClick={() => getResource(resource.previous)}>
+            Previous
+          </button>
+          <button onClick={() => getResource(resource.next)}>next</button>
         </div>
       );
     } else {

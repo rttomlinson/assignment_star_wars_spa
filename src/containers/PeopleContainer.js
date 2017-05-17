@@ -1,22 +1,30 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import People from "../components/People";
-import {getResource, getPage} from "../actions/actions";
+import {getResource, getPage, searchResources} from "../actions/actions";
 
 class PeopleContainer extends Component {
   componentDidMount() {
-    this.props.getResource("people");
+    this.props.getResource("https://swapi.co/api/people");
   }
 
   render() {
     console.log(this.props);
-    const {resource, isFetching, getPage} = this.props;
+    const {resource, isFetching, getResource, searchResources} = this.props;
     if (!isFetching) {
+      console.log("render", resource.next);
       return (
         <div>
+          <button onClick={() => getResource(resource.previous)}>
+            Previous
+          </button>
+          <button onClick={() => getResource(resource.next)}>next</button>
+          <input type="text" onKeyPress={searchResources} />
           <People people={resource.results} isFetching={isFetching} />
-          <button onClick={() => getPage(resource.previous)}>Previous</button>
-          <button onClick={() => getPage(resource.next)}>next</button>
+          <button onClick={() => getResource(resource.previous)}>
+            Previous
+          </button>
+          <button onClick={() => getResource(resource.next)}>next</button>
         </div>
       );
     } else {
@@ -37,9 +45,10 @@ function mapDispatchToProps(dispatch) {
     getResource: type => {
       dispatch(getResource(type));
     },
-    getPage: page => {
-      console.log(page);
-      dispatch(getPage(page));
+    searchResources: e => {
+      if (e.key === "Enter") {
+        dispatch(searchResources(e.target.value));
+      }
     }
   };
 }
