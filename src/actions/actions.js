@@ -24,17 +24,9 @@ export function requestFailure(error) {
 export function getResource(type, page = 1) {
   return dispatch => {
     dispatch(makeRequest());
-    const myHeaders = new Headers({
-        Origin: 'https://vikingcodeschool-rttomlinson.c9users.io'
-    });
-    const options = {
-        headers: myHeaders,
-        mode: 'cors'
-    };
-    
     
     //sending a request to the swampi api
-    fetch(`https://crossorigin.me/http://swapi.co/api/${type}/?page=${page}`, options)
+    fetch(`https://swapi.co/api/${type}/?page=${page}`)
       .then(response => {
         if (!response.ok) {
           throw new Error("Error during fetching");

@@ -10,7 +10,12 @@ import thunk from "redux-thunk";
 const INITIAL_STATE = {
   isFetching: false,
   error: null,
-  resource: {}
+  resource: {
+      count: 0,
+      next: null,
+      previous: null,
+      results: []
+  }
 };
 
 function swampiApp(state = INITIAL_STATE, action) {
