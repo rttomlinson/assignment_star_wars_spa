@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
 import Planets from "../components/Planets";
-import {getResource} from "../actions/actions";
+import {getResource, getPage} from "../actions/actions";
 
 class PlanetsContainer extends Component {
   componentDidMount() {
@@ -9,14 +9,20 @@ class PlanetsContainer extends Component {
   }
 
   render() {
-    const {resource, isFetching} = this.props;
-    return <Planets planets={resource} isFetching={isFetching} />;
+    const {resource, isFetching, getPage} = this.props;
+    return (
+      <div>
+        <Planets planets={resource.results} isFetching={isFetching} />
+        <button onClick={() => getPage(resource.previous)}>Previous</button>
+        <button onClick={() => getPage(resource.next)}>next</button>
+      </div>
+    );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    resource: state.resource.results,
+    resource: state.resource,
     isFetching: state.isFetching
   };
 }
@@ -25,6 +31,10 @@ function mapDispatchToProps(dispatch) {
   return {
     getResource: type => {
       dispatch(getResource(type));
+    },
+    getPage: page => {
+      console.log(page);
+      dispatch(getPage(page));
     }
   };
 }

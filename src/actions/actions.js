@@ -21,12 +21,31 @@ export function requestFailure(error) {
   };
 }
 
-export function getResource(type, page = 1) {
+export function getResource(type) {
   return dispatch => {
     dispatch(makeRequest());
-    
-    //sending a request to the swampi api
-    fetch(`https://swapi.co/api/${type}/?page=${page}`)
+    fetch(`https://swapi.co/api/${type}/`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Error during fetching");
+        }
+        return response.json();
+      })
+      .then(resource => {
+        dispatch(requestSuccess(resource));
+      })
+      .catch(error => {
+        console.log(error);
+        dispatch(requestFailure(error));
+      });
+  };
+}
+
+export function getPage(url) {
+  return dispatch => {
+    console.log(url);
+    dispatch(makeRequest());
+    fetch(url)
       .then(response => {
         if (!response.ok) {
           throw new Error("Error during fetching");
