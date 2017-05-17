@@ -3,24 +3,17 @@ import ReactDOM from "react-dom";
 import App from "./components/App";
 import "./index.css";
 import {Provider} from "react-redux";
-import { createStore, applyMiddleware } from 'redux';
-import {
-    MAKE_REQUEST,
-    REQUEST_SUCCESS,
-    REQUEST_FAILURE
-} from './actions/types';
-import thunk from 'redux-thunk';
+import {createStore, applyMiddleware} from "redux";
+import {MAKE_REQUEST, REQUEST_SUCCESS, REQUEST_FAILURE} from "./actions/types";
+import thunk from "redux-thunk";
 
 const INITIAL_STATE = {
-    isFetching: false,
-    error: null,
-    resource: []
-}
+  isFetching: false,
+  error: null,
+  resource: []
+};
 
-function swampiApp(
-  state = INITIAL_STATE,
-  action
-) {
+function swampiApp(state = INITIAL_STATE, action) {
   switch (action.type) {
     case MAKE_REQUEST:
       return {
@@ -45,9 +38,7 @@ function swampiApp(
   }
 }
 
-
 const store = createStore(swampiApp, applyMiddleware(thunk));
-
 
 ReactDOM.render(
   <Provider store={store}>
@@ -55,4 +46,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root")
 );
-

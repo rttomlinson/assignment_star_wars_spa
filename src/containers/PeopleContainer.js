@@ -1,16 +1,16 @@
 import React, {Component} from "react";
 import {connect} from "react-redux";
-import Planets from "../components/Planets";
+import People from "../components/People";
 import {getResource} from "../actions/actions";
 
-class PlanetsContainer extends Component {
+class PeopleContainer extends Component {
   componentDidMount() {
-    this.props.getResource("planets");
+    this.props.getResource("people");
   }
 
   render() {
     const {resource, isFetching} = this.props;
-    return <Planets planets={resource} isFetching={isFetching} />;
+    return <People people={resource} isFetching={isFetching} />;
   }
 }
 
@@ -29,4 +29,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlanetsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PeopleContainer);
