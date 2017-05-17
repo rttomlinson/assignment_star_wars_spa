@@ -52,7 +52,6 @@ export function getPage(url) {
   return dispatch => {
     console.log(url);
     dispatch(makeRequest());
-    url = url.replace('http', 'https');
     console.log('url', url);
     fetch(url)
       .then(response => {

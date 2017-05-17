@@ -8,7 +8,7 @@ class PlanetContainer extends Component {
   componentDidMount() {
     //this.props.getPage("planets");
     let id = this.props.match.params.id;
-    this.props.getPage(`http://swapi.co/api/planets/${id}`);
+    this.props.getPage(`https://swapi.co/api/planets/${id}`);
   }
 
   render() {
