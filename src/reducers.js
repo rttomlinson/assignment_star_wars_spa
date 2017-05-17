@@ -1,14 +1,13 @@
 import {MAKE_REQUEST, REQUEST_SUCCESS, REQUEST_FAILURE} from "./actions/types";
 
-
 const INITIAL_STATE = {
   isFetching: false,
   error: null,
   resource: {
-      count: 0,
-      next: null,
-      previous: null,
-      results: []
+    count: 0,
+    next: null,
+    previous: null,
+    results: []
   }
 };
 

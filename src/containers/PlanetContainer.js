@@ -2,14 +2,13 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import Planet from "../components/Planet";
 import {getPage} from "../actions/actions";
-import {withRouter} from 'react-router-dom';
+import {withRouter} from "react-router-dom";
 
 class PlanetContainer extends Component {
   componentDidMount() {
     //this.props.getPage("planets");
     let id = this.props.match.params.id;
     this.props.getPage(`https://swapi.co/api/planets/${id}`);
-    
   }
 
   render() {
@@ -32,10 +31,11 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getPage: page => {
-      console.log(page);
       dispatch(getPage(page));
     }
   };
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PlanetContainer));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(PlanetContainer)
+);

@@ -5,18 +5,27 @@ import {getResource, getPage} from "../actions/actions";
 
 class PlanetsContainer extends Component {
   componentDidMount() {
+    console.log("mount");
     this.props.getResource("planets");
   }
 
+  componentWillUnmount() {
+    console.log("unmount");
+  }
   render() {
+    console.log(this.props);
     const {resource, isFetching, getPage} = this.props;
-    return (
-      <div>
-        <Planets planets={resource.results} isFetching={isFetching} />
-        <button onClick={() => getPage(resource.previous)}>Previous</button>
-        <button onClick={() => getPage(resource.next)}>next</button>
-      </div>
-    );
+    if (!isFetching) {
+      return (
+        <div>
+          <Planets planets={resource.results} isFetching={isFetching} />
+          <button onClick={() => getPage(resource.previous)}>Previous</button>
+          <button onClick={() => getPage(resource.next)}>next</button>
+        </div>
+      );
+    } else {
+      return <h2>...loading</h2>;
+    }
   }
 }
 
