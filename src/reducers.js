@@ -1,4 +1,4 @@
-import {MAKE_REQUEST, REQUEST_SUCCESS, REQUEST_FAILURE} from "../actions/types";
+import {MAKE_REQUEST, REQUEST_SUCCESS, REQUEST_FAILURE} from "./actions/types";
 
 
 const INITIAL_STATE = {

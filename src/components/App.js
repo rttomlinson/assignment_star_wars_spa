@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import PlanetsContainer from "../containers/PlanetsContainer";
 import PeopleContainer from "../containers/PeopleContainer";
+import PlanetContainer from '../containers/PlanetContainer';
 import NavLinks from "./NavLinks";
 class App extends Component {
   render() {
@@ -19,7 +20,7 @@ class App extends Component {
             />
             <Route path="/people" component={PeopleContainer} />
             <Route exact path="/planets" component={PlanetsContainer} />
-            <Route path="/planets/:id" component={PlanetsContainer} />
+            <Route path="/planets/:id" component={PlanetContainer} />
             <Route
               render={() => {
                 return <h1>Page not found</h1>;
