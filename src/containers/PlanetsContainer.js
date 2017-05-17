@@ -16,7 +16,7 @@ class PlanetsContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    resource: state.resource,
+    resource: state.resource.results,
     isFetching: state.isFetching
   };
 }

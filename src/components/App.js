@@ -16,7 +16,8 @@ class App extends Component {
             }}
           />
           <Route path="/people" component={PeopleContainer} />
-          <Route path="/planets" component={PlanetsContainer} />
+          <Route exact path="/planets" component={PlanetsContainer} />
+          <Route path="/planets/:id" component={PlanetsContainer} />
           <Route
             render={() => {
               return <h1>Page not found</h1>;

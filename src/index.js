@@ -10,7 +10,7 @@ import thunk from "redux-thunk";
 const INITIAL_STATE = {
   isFetching: false,
   error: null,
-  resource: []
+  resource: {}
 };
 
 function swampiApp(state = INITIAL_STATE, action) {
@@ -46,3 +46,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root")
 );
+
+

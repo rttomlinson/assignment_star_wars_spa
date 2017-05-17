@@ -21,11 +21,20 @@ export function requestFailure(error) {
   };
 }
 
-export function getResource(type) {
+export function getResource(type, page = 1) {
   return dispatch => {
     dispatch(makeRequest());
+    const myHeaders = new Headers({
+        Origin: 'https://vikingcodeschool-rttomlinson.c9users.io'
+    });
+    const options = {
+        headers: myHeaders,
+        mode: 'cors'
+    };
+    
+    
     //sending a request to the swampi api
-    fetch(`http://swapi.co/api/${type}/`, {mode: "cors"})
+    fetch(`https://crossorigin.me/http://swapi.co/api/${type}/?page=${page}`, options)
       .then(response => {
         if (!response.ok) {
           throw new Error("Error during fetching");
@@ -33,7 +42,7 @@ export function getResource(type) {
         return response.json();
       })
       .then(resource => {
-        dispatch(requestSuccess(resource.results));
+        dispatch(requestSuccess(resource));
       })
       .catch(error => {
         console.log(error);
