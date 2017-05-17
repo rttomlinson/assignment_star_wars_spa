@@ -1,4 +1,4 @@
-import {MAKE_REQUEST, REQUEST_SUCCESS, REQUEST_FAILURE} from "./actions/types";
+import {MAKE_REQUEST, REQUEST_RESOURCES_SUCCESS, REQUEST_FAILURE, REQUEST_CURRENT_RESOURCE_SUCCESS} from "./actions/types";
 
 const INITIAL_STATE = {
   isFetching: false,
@@ -8,7 +8,8 @@ const INITIAL_STATE = {
     next: null,
     previous: null,
     results: []
-  }
+  },
+  currentResource: {}
 };
 
 export function swampiApp(state = INITIAL_STATE, action) {
@@ -19,7 +20,7 @@ export function swampiApp(state = INITIAL_STATE, action) {
         isFetching: true,
         error: null
       };
-    case REQUEST_SUCCESS:
+    case REQUEST_RESOURCES_SUCCESS:
       return {
         ...state,
         resource: action.data,
@@ -31,6 +32,12 @@ export function swampiApp(state = INITIAL_STATE, action) {
         isFetching: false,
         error: action.error
       };
+    case REQUEST_CURRENT_RESOURCE_SUCCESS:
+        return {
+            ...state,
+            isFetching: false,
+            currentResource: action.data
+        };
     default:
       return state;
   }

@@ -1,5 +1,5 @@
 import "isomorphic-fetch";
-import {MAKE_REQUEST, REQUEST_SUCCESS, REQUEST_FAILURE} from "./types";
+import {MAKE_REQUEST, REQUEST_RESOURCES_SUCCESS, REQUEST_FAILURE, REQUEST_CURRENT_RESOURCE_SUCCESS} from "./types";
 
 export function makeRequest() {
   return {
@@ -7,9 +7,16 @@ export function makeRequest() {
   };
 }
 
-export function requestSuccess(data) {
+export function requestResourcesSuccess(data) {
   return {
-    type: REQUEST_SUCCESS,
+    type: REQUEST_RESOURCES_SUCCESS,
+    data
+  };
+}
+
+export function requestCurrentResourceSuccess(data) {
+  return {
+    type: REQUEST_CURRENT_RESOURCE_SUCCESS,
     data
   };
 }
@@ -32,7 +39,7 @@ export function getResource(type) {
         return response.json();
       })
       .then(resource => {
-        dispatch(requestSuccess(resource));
+        dispatch(requestResourcesSuccess(resource));
       })
       .catch(error => {
         console.log(error);
@@ -53,7 +60,7 @@ export function getPage(url) {
         return response.json();
       })
       .then(resource => {
-        dispatch(requestSuccess(resource));
+        dispatch(requestCurrentResourceSuccess(resource));
       })
       .catch(error => {
         console.log(error);
